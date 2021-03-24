@@ -1,4 +1,5 @@
 import time
+import random
 from turtle import Screen
 from player import Player
 from car_manager import next_level, CarManager
@@ -32,7 +33,6 @@ screen.onkey(player_2.go_up, "w")
 car_spawning_number = 6
 players = [player_1, player_2]
 cars = []
-car_spawning_counter = 1
 game_is_on = True
 while game_is_on:
     for player in players:
@@ -41,7 +41,8 @@ while game_is_on:
                 game_is_on = False
                 scoreboard.game_over()
 
-    if car_spawning_counter == car_spawning_number:
+    number = random.randint(1, 6)
+    if number == car_spawning_number:
         car = CarManager()
         cars.append(car)
         car_spawning_counter = 0
@@ -51,7 +52,6 @@ while game_is_on:
 
     time.sleep(0.1)
     screen.update()
-    car_spawning_counter += 1
 
     if num_players == 2:
         if player_1.ycor() > 280 and player_2.ycor() > 280:
@@ -69,3 +69,4 @@ while game_is_on:
             next_level()
 
 screen.exitonclick()
+
